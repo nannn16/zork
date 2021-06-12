@@ -4,7 +4,7 @@ import io.muzoo.ssc.zork.Game;
 
 import java.util.List;
 
-public class ExitCommand implements Command {
+public class HelpCommand implements Command {
 
     @Override
     public int numArgs() {
@@ -13,12 +13,12 @@ public class ExitCommand implements Command {
 
     @Override
     public String getCommand() {
-        return "exit";
+        return "help";
     }
 
     @Override
     public void execute(Game game, List<String> args) {
-        game.getOutput().println("Game exit");
-        game.exit();
+        game.getOutput().println("Available Commands:");
+        game.help();
     }
 }
