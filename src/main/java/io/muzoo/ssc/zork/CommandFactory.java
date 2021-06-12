@@ -12,16 +12,18 @@ public class CommandFactory {
 
     private static final Map<String, Command> COMMAND_MAP = new HashMap<>();
 
-    static {{
-        for (Class<? extends Command> commandClass: REGISTERED_COMMANDS) {
-            try {
-                Command command = commandClass.getDeclaredConstructor().newInstance();
-                COMMAND_MAP.put(command.getCommand(), command);
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                e.printStackTrace();
+    static {
+        {
+            for (Class<? extends Command> commandClass : REGISTERED_COMMANDS) {
+                try {
+                    Command command = commandClass.getDeclaredConstructor().newInstance();
+                    COMMAND_MAP.put(command.getCommand(), command);
+                } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
             }
         }
-    }}
+    }
 
     public static Command get(String command) {
         return COMMAND_MAP.get(command);

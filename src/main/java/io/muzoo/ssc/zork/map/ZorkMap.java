@@ -16,6 +16,10 @@ public abstract class ZorkMap {
         this.currentRoom = map[0][0];
     }
 
+    public void moveRoom(String direction) {
+
+    }
+
     public abstract String getMapName();
 
     protected abstract int getWidth();

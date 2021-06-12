@@ -7,14 +7,15 @@ import java.util.*;
 public class CommandParser {
 
     private List<String> allCommandsSortedByLength = new ArrayList<>();
+
     {
         allCommandsSortedByLength.addAll(CommandFactory.getAllCommand());
         allCommandsSortedByLength.sort((o1, o2) -> o1.length() - o2.length());
     }
 
     public String matchInputToCommand(String input) {
-        for(String command: allCommandsSortedByLength) {
-            if(input.startsWith(command)) {
+        for (String command : allCommandsSortedByLength) {
+            if (input.startsWith(command)) {
                 return command;
             }
         }
@@ -28,8 +29,7 @@ public class CommandParser {
         if (command != null && command.numArgs() > 0) {
             String argString = cleanedInput.substring(cmd.length()).trim();
             return Arrays.asList(cmd, argString);
-        }
-        else {
+        } else {
             return Arrays.asList(cmd);
         }
     }

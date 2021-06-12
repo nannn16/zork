@@ -13,16 +13,18 @@ public class MapFactory {
 
     private static final Map<String, ZorkMap> ZORKMAP_MAP = new HashMap<>();
 
-    static {{
-        for (Class<? extends ZorkMap> mapClass: REGISTERED_MAPS) {
-            try {
-                ZorkMap map = mapClass.getDeclaredConstructor().newInstance();
-                ZORKMAP_MAP.put(map.getMapName(), map);
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                e.printStackTrace();
+    static {
+        {
+            for (Class<? extends ZorkMap> mapClass : REGISTERED_MAPS) {
+                try {
+                    ZorkMap map = mapClass.getDeclaredConstructor().newInstance();
+                    ZORKMAP_MAP.put(map.getMapName(), map);
+                } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
             }
         }
-    }}
+    }
 
     public static ZorkMap get(String command) {
         return ZORKMAP_MAP.get(command);
