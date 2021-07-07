@@ -1,6 +1,6 @@
 package io.muzoo.ssc.zork;
 
-import io.muzoo.ssc.zork.map.CastleMap;
+import io.muzoo.ssc.zork.map.UniversityMap;
 import io.muzoo.ssc.zork.map.TownMap;
 import io.muzoo.ssc.zork.map.ZorkMap;
 
@@ -9,7 +9,7 @@ import java.util.*;
 
 public class MapFactory {
 
-    private static final List<Class<? extends ZorkMap>> REGISTERED_MAPS = Arrays.asList(TownMap.class, CastleMap.class);
+    private static final List<Class<? extends ZorkMap>> REGISTERED_MAPS = Arrays.asList(TownMap.class, UniversityMap.class);
 
     private static final Map<String, ZorkMap> ZORKMAP_MAP = new HashMap<>();
 

@@ -7,4 +7,8 @@ public class Item {
     public Item(String itemName) {
         this.itemName = itemName;
     }
+
+    public String getItemName() {
+        return itemName;
+    }
 }

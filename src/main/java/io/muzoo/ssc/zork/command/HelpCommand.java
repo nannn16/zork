@@ -21,4 +21,9 @@ public class HelpCommand implements Command {
         game.getOutput().println("Available Commands:");
         game.help();
     }
+
+    @Override
+    public boolean isPlay() {
+        return false;
+    }
 }

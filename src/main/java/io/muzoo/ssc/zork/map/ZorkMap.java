@@ -1,29 +1,43 @@
 package io.muzoo.ssc.zork.map;
 
+import io.muzoo.ssc.zork.GameOutput;
 import io.muzoo.ssc.zork.Room;
+
+import java.util.ArrayList;
 
 public abstract class ZorkMap {
 
-    private int width;
-    private int depth;
-    private Room[][] map;
-    private Room currentRoom;
+    private GameOutput output = new GameOutput();
+
+    protected Room currentRoom;
+    protected ArrayList<Room> rooms;
 
     public void initialize() {
-        this.width = getWidth();
-        this.depth = getDepth();
-        this.map = new Room[width][depth];
-        this.currentRoom = map[0][0];
+        createRooms();
+    }
+
+    public boolean canMove(String direction) {
+        Room nextRoom = currentRoom.getExits().get(direction);
+        if(nextRoom == null) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     public void moveRoom(String direction) {
-
+        if(canMove(direction)) {
+            Room nextRoom = currentRoom.getExits().get(direction);
+            currentRoom = nextRoom;
+        }
     }
 
     public abstract String getMapName();
 
-    protected abstract int getWidth();
+    protected abstract void createRooms();
 
-    protected abstract int getDepth();
-
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
 }

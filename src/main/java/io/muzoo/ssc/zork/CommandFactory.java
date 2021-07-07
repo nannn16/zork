@@ -8,7 +8,8 @@ import java.util.*;
 public class CommandFactory {
 
     private static final List<Class<? extends Command>> REGISTERED_COMMANDS = Arrays.asList(ExitCommand.class,
-            HelpCommand.class, InfoCommand.class, PlayCommand.class);
+            HelpCommand.class, InfoCommand.class, PlayCommand.class, GoCommand.class, TakeCommand.class,
+            DropCommand.class);
 
     private static final Map<String, Command> COMMAND_MAP = new HashMap<>();
 

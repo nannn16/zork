@@ -4,26 +4,25 @@ import io.muzoo.ssc.zork.Game;
 
 import java.util.List;
 
-public class ExitCommand implements Command {
+public class GoCommand implements Command {
 
     @Override
     public int numArgs() {
-        return 0;
+        return 1;
     }
 
     @Override
     public String getCommand() {
-        return "exit";
+        return "go";
     }
 
     @Override
     public void execute(Game game, List<String> args) {
-        game.getOutput().println("Game exit");
-        game.exit();
+        game.go(args.get(0));
     }
 
     @Override
     public boolean isPlay() {
-        return false;
+        return true;
     }
 }

@@ -20,4 +20,9 @@ public class PlayCommand implements Command {
     public void execute(Game game, List<String> args) {
         game.play(args.get(0));
     }
+
+    @Override
+    public boolean isPlay() {
+        return false;
+    }
 }

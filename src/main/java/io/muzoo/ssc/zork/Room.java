@@ -6,12 +6,14 @@ import java.util.List;
 
 public class Room {
 
+    private String description;
     private List<Item> items;
     private List<Monster> monsters;
-    public HashMap<String, Room> exits;
+    private HashMap<String, Room> exits;
 
-    public Room() {
-        this.items = new ArrayList<>();
+    public Room(String description, List<Item> items) {
+        this.description = description;
+        this.items = items;
         this.monsters = new ArrayList<>();
         this.exits = new HashMap<>();
     }
@@ -26,5 +28,23 @@ public class Room {
 
     public boolean canMove(String direction) {
         return exits.containsKey(direction);
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public HashMap<String, Room> getExits() {
+        return exits;
+    }
+
+    public Item getItem(String item) {
+        for(int i=0; i<items.size(); i++) {
+            if(items.get(i).getItemName().equals(item)) {
+                return items.get(i);
+            }
+        }
+        return null;
     }
 }

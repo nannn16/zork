@@ -19,4 +19,9 @@ public class InfoCommand implements Command {
     public void execute(Game game, List<String> args) {
         game.info();
     }
+
+    @Override
+    public boolean isPlay() {
+        return true;
+    }
 }
