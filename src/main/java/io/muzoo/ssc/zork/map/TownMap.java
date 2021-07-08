@@ -1,7 +1,9 @@
 package io.muzoo.ssc.zork.map;
 
-import io.muzoo.ssc.zork.Item;
+import io.muzoo.ssc.zork.item.Defense;
+import io.muzoo.ssc.zork.item.Item;
 import io.muzoo.ssc.zork.Room;
+import io.muzoo.ssc.zork.item.Weapon;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,9 +19,13 @@ public class TownMap extends ZorkMap {
     @Override
     protected void createRooms()
     {
-        List<Item> outsideItems = Arrays.asList(new Item("pan"));
-        List<Item> pubItems = Arrays.asList(new Item("knife"));
-        List<Item> gymItems = Arrays.asList(new Item("sword"));
+        List<Item> outsideItems = new ArrayList<>();
+        outsideItems.add(new Weapon("pan", 50));
+        List<Item> pubItems = new ArrayList<>();
+        pubItems.add(new Weapon("knife", 100));
+        pubItems.add(new Defense("vest", 70));
+        List<Item> gymItems = new ArrayList<>();
+        gymItems.add(new Weapon("sword", 200));
 
         // create the rooms
         Room outside = new Room("outside the main entrance of the town", outsideItems);

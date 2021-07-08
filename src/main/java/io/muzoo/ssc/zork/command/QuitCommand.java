@@ -4,21 +4,21 @@ import io.muzoo.ssc.zork.Game;
 
 import java.util.List;
 
-public class DropCommand implements Command {
+public class QuitCommand implements Command {
 
     @Override
     public int numArgs() {
-        return 1;
+        return 0;
     }
 
     @Override
     public String getCommand() {
-        return "drop";
+        return "quit";
     }
 
     @Override
     public void execute(Game game, List<String> args) {
-        game.drop(args.get(0));
+        game.quit();
     }
 
     @Override

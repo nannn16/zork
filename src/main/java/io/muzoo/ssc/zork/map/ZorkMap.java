@@ -16,21 +16,13 @@ public abstract class ZorkMap {
         createRooms();
     }
 
-    public boolean canMove(String direction) {
-        Room nextRoom = currentRoom.getExits().get(direction);
-        if(nextRoom == null) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
-
-    public void moveRoom(String direction) {
-        if(canMove(direction)) {
+    public boolean moveRoom(String direction) {
+        boolean canmove = currentRoom.canMove(direction);
+        if(canmove) {
             Room nextRoom = currentRoom.getExits().get(direction);
             currentRoom = nextRoom;
         }
+        return canmove;
     }
 
     public abstract String getMapName();

@@ -10,7 +10,7 @@ public class Monster {
     private Random random = new Random();
 
     public Monster() {
-        this.MaxHP = random.nextInt(1000);
+        this.MaxHP = random.nextInt(1000-100) + 100;
         this.HP = MaxHP;
         this.attackPower = random.nextInt(100);
     }
@@ -21,5 +21,13 @@ public class Monster {
 
     public int getAttackPower() {
         return attackPower;
+    }
+
+    public void setHP(int HP) {
+        this.HP = HP;
+    }
+
+    public String getStat() {
+        return "monster HP: " + HP + "/" + MaxHP + " attack power: " + attackPower;
     }
 }

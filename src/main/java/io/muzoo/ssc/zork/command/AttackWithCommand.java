@@ -4,7 +4,7 @@ import io.muzoo.ssc.zork.Game;
 
 import java.util.List;
 
-public class DropCommand implements Command {
+public class AttackWithCommand implements Command {
 
     @Override
     public int numArgs() {
@@ -13,12 +13,12 @@ public class DropCommand implements Command {
 
     @Override
     public String getCommand() {
-        return "drop";
+        return "attack with";
     }
 
     @Override
     public void execute(Game game, List<String> args) {
-        game.drop(args.get(0));
+        game.attackWith(args.get(0));
     }
 
     @Override

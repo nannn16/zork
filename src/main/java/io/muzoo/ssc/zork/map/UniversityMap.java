@@ -1,7 +1,9 @@
 package io.muzoo.ssc.zork.map;
 
-import io.muzoo.ssc.zork.Item;
+import io.muzoo.ssc.zork.item.Defense;
+import io.muzoo.ssc.zork.item.Item;
 import io.muzoo.ssc.zork.Room;
+import io.muzoo.ssc.zork.item.Weapon;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,10 +19,14 @@ public class UniversityMap extends ZorkMap {
     @Override
     protected void createRooms()
     {
-        List<Item> outsideItems = Arrays.asList(new Item("pan"));
-        List<Item> theaterItems = Arrays.asList(new Item("sword"));
-        List<Item> labItems = Arrays.asList(new Item("handgun"));
-        List<Item> officeItems = Arrays.asList(new Item("machine gun"));
+        List<Item> outsideItems = new ArrayList<>();
+        outsideItems.add(new Weapon("pan", 50));
+        List<Item> theaterItems = new ArrayList<>();
+        theaterItems.add(new Weapon("sword", 200));
+        List<Item> labItems = new ArrayList<>();
+        labItems.add(new Defense("helmet", 50));
+        List<Item> officeItems = new ArrayList<>();
+        officeItems.add(new Weapon("machine gun", 100));
 
         // create the rooms
         Room outside = new Room("outside the main entrance of the university", outsideItems);
