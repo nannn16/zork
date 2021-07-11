@@ -7,12 +7,16 @@ public class Monster {
     private int HP;
     private int MaxHP;
     private int attackPower;
+    private final int MAXHP_UPPPERBOUND = 1000;
+    private final int MAXHP_LOWERBOUND = 100;
+    private final int ATTACKPOWER_UPPERBOUND = 200;
+    private final int ATTACKPOWER_LOWERBOUND = 50;
     private Random random = new Random();
 
     public Monster() {
-        this.MaxHP = random.nextInt(1000-100) + 100;
+        this.MaxHP = random.nextInt(MAXHP_UPPPERBOUND-MAXHP_LOWERBOUND) + MAXHP_LOWERBOUND;
         this.HP = MaxHP;
-        this.attackPower = random.nextInt(100);
+        this.attackPower = random.nextInt(ATTACKPOWER_UPPERBOUND-ATTACKPOWER_LOWERBOUND) + ATTACKPOWER_LOWERBOUND;
     }
 
     public int getHP() {
@@ -23,8 +27,8 @@ public class Monster {
         return attackPower;
     }
 
-    public void setHP(int HP) {
-        this.HP = HP;
+    public void beingAttacked(int attackPower) {
+        HP -= random.nextInt(attackPower);
     }
 
     public String getStat() {

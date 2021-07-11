@@ -143,7 +143,13 @@ public class Game {
         }
         else {
             player.attack(monster, item);
-            output.println("monster died");
+            if(player.getHP() > 0) {
+                output.println("player died");
+                quit();
+            }
+            else {
+                output.println("monster died");
+            }
         }
     }
 

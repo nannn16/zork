@@ -5,6 +5,7 @@ import io.muzoo.ssc.zork.Game;
 import java.util.List;
 
 public class LoadCommand implements Command {
+
     @Override
     public int numArgs() {
         return 1;

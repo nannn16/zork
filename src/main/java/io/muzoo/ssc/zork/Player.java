@@ -4,10 +4,11 @@ import io.muzoo.ssc.zork.item.Item;
 
 import java.util.Random;
 
-public class Player extends Stat {
+public class Player {
 
     private final int MAX_HP = 1000;
     private final int INCREASE_HP = 100;
+    private final int DEFAULT_ATTACKPOWER = 100;
     private int HP;
     private int attackPower;
     private Inventory inventory;
@@ -15,16 +16,14 @@ public class Player extends Stat {
 
     public Player() {
         this.HP = MAX_HP;
-        this.attackPower = 100;
+        this.attackPower = DEFAULT_ATTACKPOWER;
         this.inventory = new Inventory();
     }
 
-    @Override
     protected int getHP() {
         return HP;
     }
 
-    @Override
     protected int getMaxHP() {
         return MAX_HP;
     }
@@ -44,16 +43,15 @@ public class Player extends Stat {
         return attackPower;
     }
 
-    public void increaseAttackPower(int attackPower) {
-        this.attackPower += attackPower;
+    public void beingAttacked(int attackPower) {
+        HP -= random.nextInt(attackPower);
     }
 
     public void attack(Monster monster, Item weapon) {
         int power = attackPower + weapon.getAttackPower();
         while(monster.getHP() > 0 && HP > 0) {
-            int monsterHP = monster.getHP() - random.nextInt(power);
-            monster.setHP(monsterHP);
-            HP -= random.nextInt(monster.getAttackPower());
+            monster.beingAttacked(power);
+            beingAttacked(monster.getAttackPower());
         }
     }
 }
