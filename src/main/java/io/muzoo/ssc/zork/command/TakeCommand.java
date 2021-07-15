@@ -17,8 +17,19 @@ public class TakeCommand implements Command {
     }
 
     @Override
-    public void execute(Game game, List<String> args) {
-        game.take(args.get(0));
+    public String getDescription() {
+        return "– take command is used to pick up the item in the current room";
+    }
+
+    @Override
+    public boolean execute(Game game, List<String> args, boolean isPlay) {
+        if(isPlay) {
+            game.take(args.get(0));
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     @Override

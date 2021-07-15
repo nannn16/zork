@@ -10,7 +10,9 @@ public interface Command {
 
     String getCommand();
 
-    void execute(Game game, List<String> args);
+    String getDescription();
+
+    boolean execute(Game game, List<String> args, boolean isPlay);
 
     boolean isPlay();
 }

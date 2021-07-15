@@ -1,25 +1,27 @@
 package io.muzoo.ssc.zork;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import io.muzoo.ssc.zork.map.ZorkMap;
 
 public class Save {
 
-    private Map<String, List<String>> savePoints;
+    private ZorkMap map;
+    private Player player;
 
-    public Save() {
-        savePoints = new HashMap<>();
+    public Save(ZorkMap map, Player player) {
+        Player player1 = new Player();
+        player1.setHP(player.getHP());
+        player1.setAttackPower(player.getAttackPower());
+        player1.setDeepCopyInventory();
+
+        this.map = map;
+        this.player = player1;
     }
 
-    public void savePoint(String savedPointName, List<String> cmds) {
-        savePoints.put(savedPointName, cmds);
+    public ZorkMap getMap() {
+        return map;
     }
 
-    public List<String> loadPoint(String savedPointName) {
-        if(savePoints.containsKey(savedPointName)) {
-            return savePoints.get(savedPointName);
-        }
-        return null;
+    public Player getPlayer() {
+        return player;
     }
 }

@@ -17,8 +17,19 @@ public class AttackWithCommand implements Command {
     }
 
     @Override
-    public void execute(Game game, List<String> args) {
-        game.attackWith(args.get(0));
+    public String getDescription() {
+        return "- is used to attack a monster in the current room";
+    }
+
+    @Override
+    public boolean execute(Game game, List<String> args, boolean isPlay) {
+        if(isPlay) {
+            game.attackWith(args.get(0));
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     @Override

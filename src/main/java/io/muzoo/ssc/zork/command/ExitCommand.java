@@ -17,9 +17,19 @@ public class ExitCommand implements Command {
     }
 
     @Override
-    public void execute(Game game, List<String> args) {
-        game.getOutput().println("Game exit");
-        game.exit();
+    public String getDescription() {
+        return "– exit whole game";
+    }
+
+    @Override
+    public boolean execute(Game game, List<String> args, boolean isPlay) {
+        if(!isPlay) {
+            game.exit();
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     @Override

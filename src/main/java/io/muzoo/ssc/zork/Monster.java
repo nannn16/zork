@@ -7,9 +7,9 @@ public class Monster {
     private int HP;
     private int MaxHP;
     private int attackPower;
-    private final int MAXHP_UPPPERBOUND = 1000;
+    private final int MAXHP_UPPPERBOUND = 700;
     private final int MAXHP_LOWERBOUND = 100;
-    private final int ATTACKPOWER_UPPERBOUND = 200;
+    private final int ATTACKPOWER_UPPERBOUND = 150;
     private final int ATTACKPOWER_LOWERBOUND = 50;
     private Random random = new Random();
 
@@ -29,6 +29,13 @@ public class Monster {
 
     public void beingAttacked(int attackPower) {
         HP -= random.nextInt(attackPower);
+        if(HP < 0) {
+            HP = 0;
+        }
+    }
+
+    public boolean isAlive() {
+        return HP > 0;
     }
 
     public String getStat() {

@@ -17,12 +17,23 @@ public class SaveCommand implements Command {
     }
 
     @Override
-    public void execute(Game game, List<String> args) {
-        game.savePoint(args.get(0));
+    public String getDescription() {
+        return "- save game state";
+    }
+
+    @Override
+    public boolean execute(Game game, List<String> args, boolean isPlay) {
+        if(isPlay) {
+            game.savePoint(args.get(0));
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     @Override
     public boolean isPlay() {
-        return false;
+        return true;
     }
 }

@@ -21,26 +21,35 @@ public class TownMap extends ZorkMap {
     {
         List<Item> outsideItems = new ArrayList<>();
         outsideItems.add(new Weapon("pan", 50));
+        outsideItems.add(new Weapon("crossbow", 70));
         List<Item> pubItems = new ArrayList<>();
         pubItems.add(new Weapon("knife", 100));
-        pubItems.add(new Defense("vest", 70));
+        pubItems.add(new Defense("helmet", 20));
         List<Item> gymItems = new ArrayList<>();
         gymItems.add(new Weapon("sword", 200));
+        List<Item> playgroundItems = new ArrayList<>();
+        playgroundItems.add(new Defense("vest", 30));
 
         // create the rooms
         Room outside = new Room("outside the main entrance of the town", outsideItems);
         Room pub = new Room("in the pub", pubItems);
         Room gym = new Room("in the gym", gymItems);
+        Room playground = new Room("in the playground", playgroundItems);
 
-        rooms = new ArrayList<Room>(Arrays.asList(outside, pub, gym));
+        rooms = new ArrayList<>(Arrays.asList(outside, pub, gym, playground));
 
         // initialise room exits
         outside.setExits("west", pub);
+        outside.setExits("north", playground);
 
         pub.setExits("east", outside);
-        pub.setExits("up", gym);
+        pub.setExits("north", gym);
 
-        gym.setExits("down", pub);
+        gym.setExits("south", pub);
+        gym.setExits("east", playground);
+
+        playground.setExits("south", outside);
+        playground.setExits("west", gym);
 
         currentRoom = outside;  // start game outside
     }

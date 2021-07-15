@@ -2,7 +2,6 @@ package io.muzoo.ssc.zork;
 
 import io.muzoo.ssc.zork.item.Item;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -10,13 +9,14 @@ import java.util.Set;
 public class Room {
 
     private String description;
-    private List<Item> items;
+    private Inventory inventory;
     private Monster monster;
     private HashMap<String, Room> exits;
 
     public Room(String description, List<Item> items) {
         this.description = description;
-        this.items = items;
+        this.inventory = new Inventory();
+        inventory.addAllItems(items);
         this.monster = new Monster();
         this.exits = new HashMap<>();
     }
@@ -41,41 +41,24 @@ public class Room {
         return exits;
     }
 
+    public boolean isMonsterAlive() {
+        return monster.isAlive();
+    }
+
     public Monster getMonster() {
         return monster;
     }
 
-    public int getItemIndex(String item) {
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i).getItemName().equals(item)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
     public Item getItem(String item) {
-        int i = getItemIndex(item);
-        if(i >= 0) {
-            return items.get(i);
-        }
-        return null;
+        return inventory.getItem(item);
     }
 
-    public void removeItem(String item) {
-        int i = getItemIndex(item);
-        if(i >= 0) {
-            items.remove(i);
-        }
+    public void removeItem(Item item) {
+        inventory.dropItem(item);
     }
 
     public List<String> getItemsStat() {
-        List<String> itemsStat = new ArrayList<>();
-        for (int i = 0; i < items.size(); i++) {
-            String stat = items.get(i).getItemStat();
-            itemsStat.add(stat);
-        }
-        return itemsStat;
+        return inventory.getItemsStat();
     }
 
     public String getExitInfo() {
@@ -85,19 +68,21 @@ public class Room {
         for (String direction : directions) {
             info.append(direction + " ");
         }
-        info.append("\n");
         return info.toString();
     }
 
     public String getStat() {
         StringBuilder info = new StringBuilder();
+        info.append(description);
+        info.append("\n");
         // monster not die yet
-        if(monster.getHP() > 0) {
+        if(monster.isAlive()) {
             info.append(monster.getStat());
+            info.append("\n");
         }
         List<String> itemsStat = getItemsStat();
-        for(int i=0; i<itemsStat.size(); i++) {
-            info.append(itemsStat.get(i));
+        for (String s : itemsStat) {
+            info.append(s);
             info.append("\n");
         }
         info.append(getExitInfo());

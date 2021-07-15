@@ -30,7 +30,7 @@ public class MapFactory {
         return ZORKMAP_MAP.get(command);
     }
 
-    public static List<String> getAllCommand() {
+    public static List<String> getAllMapName() {
         return new ArrayList<>(ZORKMAP_MAP.keySet());
     }
 }

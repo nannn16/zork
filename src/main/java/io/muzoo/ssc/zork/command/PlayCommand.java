@@ -17,12 +17,24 @@ public class PlayCommand implements Command {
     }
 
     @Override
-    public void execute(Game game, List<String> args) {
-        game.play(args.get(0));
+    public String getDescription() {
+        return "– play new game";
+    }
+
+    @Override
+    public boolean execute(Game game, List<String> args, boolean isPlay) {
+        if(!isPlay) {
+            game.play(args.get(0));
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     @Override
     public boolean isPlay() {
         return false;
     }
+
 }

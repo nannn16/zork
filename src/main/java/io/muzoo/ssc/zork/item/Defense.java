@@ -22,6 +22,6 @@ public class Defense extends Item {
 
     @Override
     public int getDefensePower() {
-        return 0;
+        return defensePower;
     }
 }

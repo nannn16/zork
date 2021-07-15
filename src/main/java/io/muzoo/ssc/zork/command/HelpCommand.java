@@ -17,9 +17,14 @@ public class HelpCommand implements Command {
     }
 
     @Override
-    public void execute(Game game, List<String> args) {
-        game.getOutput().println("Available Commands:");
+    public String getDescription() {
+        return "– print all commands";
+    }
+
+    @Override
+    public boolean execute(Game game, List<String> args, boolean isPlay) {
         game.help();
+        return true;
     }
 
     @Override

@@ -1,13 +1,10 @@
 package io.muzoo.ssc.zork.map;
 
-import io.muzoo.ssc.zork.GameOutput;
 import io.muzoo.ssc.zork.Room;
 
 import java.util.ArrayList;
 
 public abstract class ZorkMap {
-
-    private GameOutput output = new GameOutput();
 
     protected Room currentRoom;
     protected ArrayList<Room> rooms;
@@ -17,12 +14,12 @@ public abstract class ZorkMap {
     }
 
     public boolean moveRoom(String direction) {
-        boolean canmove = currentRoom.canMove(direction);
-        if(canmove) {
+        boolean canMove = currentRoom.canMove(direction);
+        if(canMove) {
             Room nextRoom = currentRoom.getExits().get(direction);
             currentRoom = nextRoom;
         }
-        return canmove;
+        return canMove;
     }
 
     public abstract String getMapName();
@@ -31,5 +28,14 @@ public abstract class ZorkMap {
 
     public Room getCurrentRoom() {
         return currentRoom;
+    }
+
+    public boolean isEnd() {
+        for (Room room: rooms) {
+            if(room.isMonsterAlive()) {
+                return false;
+            }
+        }
+        return true;
     }
 }

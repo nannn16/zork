@@ -17,8 +17,19 @@ public class LoadCommand implements Command {
     }
 
     @Override
-    public void execute(Game game, List<String> args) {
-        game.loadPoint(args.get(0));
+    public String getDescription() {
+        return "– load game state from saved point";
+    }
+
+    @Override
+    public boolean execute(Game game, List<String> args, boolean isPlay) {
+        if(!isPlay) {
+            game.loadPoint(args.get(0));
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     @Override

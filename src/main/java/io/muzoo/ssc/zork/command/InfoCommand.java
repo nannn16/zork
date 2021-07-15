@@ -5,6 +5,7 @@ import io.muzoo.ssc.zork.Game;
 import java.util.List;
 
 public class InfoCommand implements Command {
+
     @Override
     public int numArgs() {
         return 0;
@@ -16,8 +17,19 @@ public class InfoCommand implements Command {
     }
 
     @Override
-    public void execute(Game game, List<String> args) {
-        game.info();
+    public String getDescription() {
+        return "– print out information of the player and the room that the player is currently in";
+    }
+
+    @Override
+    public boolean execute(Game game, List<String> args, boolean isPlay) {
+        if(isPlay) {
+            game.info();
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     @Override

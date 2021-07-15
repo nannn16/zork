@@ -17,8 +17,19 @@ public class GoCommand implements Command {
     }
 
     @Override
-    public void execute(Game game, List<String> args) {
-        game.go(args.get(0));
+    public String getDescription() {
+        return "– move player to the room as specified by the direction (north, east, west, south)";
+    }
+
+    @Override
+    public boolean execute(Game game, List<String> args, boolean isPlay) {
+        if(isPlay) {
+            game.go(args.get(0));
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     @Override

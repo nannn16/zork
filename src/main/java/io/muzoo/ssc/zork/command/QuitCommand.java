@@ -17,8 +17,19 @@ public class QuitCommand implements Command {
     }
 
     @Override
-    public void execute(Game game, List<String> args) {
-        game.quit();
+    public String getDescription() {
+        return "– end the current game and return to command prompt to let user choose the map or load from saved point again";
+    }
+
+    @Override
+    public boolean execute(Game game, List<String> args, boolean isPlay) {
+        if(isPlay) {
+            game.quit();
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     @Override

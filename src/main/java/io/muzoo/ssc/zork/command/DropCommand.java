@@ -17,11 +17,21 @@ public class DropCommand implements Command {
     }
 
     @Override
-    public void execute(Game game, List<String> args) {
-        game.drop(args.get(0));
+    public String getDescription() {
+        return "– drop item of choice that the player currently carries";
     }
 
     @Override
+    public boolean execute(Game game, List<String> args, boolean isPlay) {
+        if(isPlay) {
+            game.drop(args.get(0));
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public boolean isPlay() {
         return true;
     }

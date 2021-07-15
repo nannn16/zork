@@ -21,7 +21,7 @@ public class Weapon extends Item {
 
     @Override
     public String getItemStat() {
-        String stat = getItemName() + ": attack power:" + attackPower;
+        String stat = getItemName() + " attack power: " + attackPower;
         return stat;
     }
 }
