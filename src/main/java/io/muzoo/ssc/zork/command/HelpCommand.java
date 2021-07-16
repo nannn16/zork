@@ -1,6 +1,8 @@
 package io.muzoo.ssc.zork.command;
 
 import io.muzoo.ssc.zork.Game;
+import io.muzoo.ssc.zork.Player;
+import io.muzoo.ssc.zork.map.ZorkMap;
 
 import java.util.List;
 
@@ -22,8 +24,9 @@ public class HelpCommand implements Command {
     }
 
     @Override
-    public boolean execute(Game game, List<String> args, boolean isPlay) {
-        game.help();
+    public boolean execute(Game game, List<String> args) {
+        boolean isPlay = game.isPlay();
+        game.getOutput().help(isPlay);
         return true;
     }
 

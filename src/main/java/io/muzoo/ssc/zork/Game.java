@@ -29,7 +29,7 @@ public class Game {
         List<String> words = commandParser.parse(s);
         Command command = CommandFactory.get(words.get(0));
         if (command != null) {
-            boolean canExecute = command.execute(this, words.subList(1, words.size()), isPlay);
+            boolean canExecute = command.execute(this, words.subList(1, words.size()));
             if (!canExecute) {
                 if (!isPlay) {
                     output.println("This command only available while playing game");
@@ -40,6 +40,26 @@ public class Game {
         } else {
             output.println("Command not found");
         }
+    }
+
+    public GameOutput getOutput() {
+        return output;
+    }
+
+    public ZorkMap getMap() {
+        return map;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public boolean isPlay() {
+        return isPlay;
+    }
+
+    public void exit() {
+        System.exit(0);
     }
 
     public void reset() {
@@ -64,79 +84,6 @@ public class Game {
         isPlay = false;
         reset();
         output.println("Game quit");
-    }
-
-    public void exit() {
-        output.println("Game exit");
-        System.exit(0);
-    }
-
-    public void help() {
-        output.help(isPlay);
-    }
-
-    public void info() {
-        output.info(player, map);
-    }
-
-    public void go(String direction) {
-        if (direction.equals("")) {
-            output.println("Go where?");
-            return;
-        }
-
-        boolean move = map.moveRoom(direction);
-        if (!move) {
-            output.println("There is no room");
-        } else {
-            player.increaseHP();
-            output.println(map.getCurrentRoom().getDescription());
-        }
-    }
-
-    public void take(String object) {
-        Room currentRoom = map.getCurrentRoom();
-        Item item = currentRoom.getItem(object);
-        if (item != null) {
-            player.take(item);
-            currentRoom.removeItem(item);
-            output.println("Pick up " + object);
-        } else {
-            output.println("No such item in this room");
-        }
-    }
-
-    public void drop(String object) {
-        boolean isDrop = player.drop(object);
-        if (isDrop) {
-            output.println("Drop " + object);
-        } else {
-            output.println("No such item in inventory");
-        }
-    }
-
-    public void attackWith(String weapon) {
-        Room room = map.getCurrentRoom();
-        Monster monster = room.getMonster();
-        if (monster == null || monster.getHP() <= 0) {
-            output.println("Monster already died");
-        } else {
-            boolean isAttack = player.attack(monster, weapon);
-            if (!isAttack) {
-                output.println("No such weapon in the inventory");
-            } else if (player.getHP() <= 0) {
-                gameOver();
-            } else {
-                defeatMonster();
-            }
-        }
-    }
-
-    public void defeatMonster() {
-        output.println("Defeat a monster");
-        if (map.isEnd()) {
-            end();
-        }
     }
 
     public void gameOver() {

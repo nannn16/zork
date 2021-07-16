@@ -1,5 +1,6 @@
 package io.muzoo.ssc.zork.map;
 
+import io.muzoo.ssc.zork.MapFactory;
 import io.muzoo.ssc.zork.Room;
 
 import java.util.ArrayList;

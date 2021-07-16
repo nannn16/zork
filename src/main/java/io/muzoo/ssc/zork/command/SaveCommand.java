@@ -1,6 +1,9 @@
 package io.muzoo.ssc.zork.command;
 
 import io.muzoo.ssc.zork.Game;
+import io.muzoo.ssc.zork.Player;
+import io.muzoo.ssc.zork.Save;
+import io.muzoo.ssc.zork.map.ZorkMap;
 
 import java.util.List;
 
@@ -22,7 +25,8 @@ public class SaveCommand implements Command {
     }
 
     @Override
-    public boolean execute(Game game, List<String> args, boolean isPlay) {
+    public boolean execute(Game game, List<String> args) {
+        boolean isPlay = game.isPlay();
         if(isPlay) {
             game.savePoint(args.get(0));
             return true;

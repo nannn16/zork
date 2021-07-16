@@ -1,6 +1,8 @@
 package io.muzoo.ssc.zork.command;
 
 import io.muzoo.ssc.zork.Game;
+import io.muzoo.ssc.zork.Player;
+import io.muzoo.ssc.zork.map.ZorkMap;
 
 import java.util.List;
 
@@ -22,9 +24,24 @@ public class GoCommand implements Command {
     }
 
     @Override
-    public boolean execute(Game game, List<String> args, boolean isPlay) {
+    public boolean execute(Game game, List<String> args) {
+        boolean isPlay = game.isPlay();
         if(isPlay) {
-            game.go(args.get(0));
+            Player player = game.getPlayer();
+            ZorkMap map = game.getMap();
+            String direction = args.get(0);
+            if (direction.equals("")) {
+                game.getOutput().println("Go where?");
+                return true;
+            }
+
+            boolean move = map.moveRoom(direction);
+            if (!move) {
+                game.getOutput().println("There is no room");
+            } else {
+                player.increaseHP();
+                game.getOutput().println(map.getCurrentRoom().getDescription());
+            }
             return true;
         }
         else {

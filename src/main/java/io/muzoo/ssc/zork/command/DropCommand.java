@@ -1,6 +1,8 @@
 package io.muzoo.ssc.zork.command;
 
 import io.muzoo.ssc.zork.Game;
+import io.muzoo.ssc.zork.Player;
+import io.muzoo.ssc.zork.map.ZorkMap;
 
 import java.util.List;
 
@@ -22,12 +24,21 @@ public class DropCommand implements Command {
     }
 
     @Override
-    public boolean execute(Game game, List<String> args, boolean isPlay) {
+    public boolean execute(Game game, List<String> args) {
+        boolean isPlay = game.isPlay();
         if(isPlay) {
-            game.drop(args.get(0));
+            Player player = game.getPlayer();
+            String object = args.get(0);
+            boolean isDrop = player.drop(object);
+            if (isDrop) {
+                game.getOutput().println("Drop " + object);
+            } else {
+                game.getOutput().println("No such item in inventory");
+            }
             return true;
         }
         else {
+            game.getOutput().println("This command only available while playing game");
             return false;
         }
     }

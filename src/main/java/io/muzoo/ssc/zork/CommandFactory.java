@@ -21,10 +21,6 @@ public class CommandFactory {
                 try {
                     Command command = commandClass.getDeclaredConstructor().newInstance();
                     COMMAND_MAP.put(command.getCommand(), command);
-                    if(command.getCommand().equals("help")) {
-                        PlAY_COMMAND_MAP.put(command.getCommand(), command);
-                        START_COMMAND_MAP.put(command.getCommand(), command);
-                    }
                     if(command.isPlay()) {
                         PlAY_COMMAND_MAP.put(command.getCommand(), command);
                     }

@@ -26,7 +26,7 @@ public class Player {
         this.inventory = new Inventory();
     }
 
-    protected int getHP() {
+    public int getHP() {
         return HP;
     }
 

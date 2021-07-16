@@ -1,6 +1,8 @@
 package io.muzoo.ssc.zork.command;
 
 import io.muzoo.ssc.zork.Game;
+import io.muzoo.ssc.zork.Player;
+import io.muzoo.ssc.zork.map.ZorkMap;
 
 import java.util.List;
 
@@ -22,9 +24,12 @@ public class InfoCommand implements Command {
     }
 
     @Override
-    public boolean execute(Game game, List<String> args, boolean isPlay) {
+    public boolean execute(Game game, List<String> args) {
+        boolean isPlay = game.isPlay();
         if(isPlay) {
-            game.info();
+            Player player = game.getPlayer();
+            ZorkMap map = game.getMap();
+            game.getOutput().info(player, map);
             return true;
         }
         else {
